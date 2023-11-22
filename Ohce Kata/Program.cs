@@ -1,18 +1,5 @@
-﻿
-using Ohce_Kata;
+﻿using Ohce_Kata.Services;
 
-var ohce = new Ohce();
-bool StopApplication = false;
-
-
-while (!StopApplication)
-{
-    string? inputText = Console.ReadLine();
-    if (inputText != null)
-    {
-        Console.WriteLine(ohce.AnalyzeText(inputText));
-        StopApplication = ohce.hasFinished;
-       
-    }
-       
-}
+var ohceKataService = new OhceKataService();
+var runnerService = new RunnerService(ohceKataService);
+runnerService.Run();
