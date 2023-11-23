@@ -3,39 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Ohce_Kata.Services.Helpers;
 namespace Ohce_Kata.Services
 {
     public class RunnerService : Interfaces.IRunnerService
     {
-        public RunnerService(OhceKataService _ohceKataService)
+        public RunnerService()
         {
-            ohceKataService = _ohceKataService;
+            ohceKataService = new OhceKataService();
         }
 
         private string? name { get; set; }
-        const string STOPWORD = "Stop!";
+        const string STOP_WORD = "Stop!";
         private readonly OhceKataService ohceKataService;
         public void Run()
-        {
-            SetupName();
-
-            do
-            {
-                var inputText = Console.ReadLine();
-                if (inputText == STOPWORD)
-                    break;
-                if (string.IsNullOrWhiteSpace(inputText))
-                    PrintErrorMessage("You must type a word");
-                else
-                    ohceKataService.Palindrome(inputText);
-
-            } while (true);
-
-
-
-        }
-        public void SetupName()
         {
             bool isValidName = false;
             do
@@ -51,26 +32,51 @@ namespace Ohce_Kata.Services
                 }
             } while (!isValidName);
 
-            ohceKataService.GetGreets(name);
+            Console.WriteLine(ohceKataService.GetGreets(name));
+
+            do
+            {
+                var inputText = Console.ReadLine();
+                if (inputText == STOP_WORD)
+                    break;
+                if (string.IsNullOrWhiteSpace(inputText))
+                    PrintErrorMessage("You must type a word");
+                else
+                {
+                    AnalyzeWord(inputText);
+                }
+
+            } while (true);
+
+
+
         }
-        public void PrintErrorMessage(string phrase)
+        public void AnalyzeWord(string text)
         {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Error: " + phrase);
-            Console.ResetColor();
+            Console.WriteLine(StringHelper.ReverseWord(text));
+
+            if (ohceKataService.isPalindrome(text))
+                Console.WriteLine("!Bonita Palabra¡");
+
         }
         public string GetNameFromConsole()
         {
             Console.WriteLine("What`s your name?");
             var consoleOutput = Console.ReadLine();
-            if (isInvalidName(consoleOutput))
+            if (StringHelper.isInvalidName(consoleOutput))
                 throw new ArgumentException("Introduce a valid name");
             return consoleOutput;
         }
-
-        public bool isInvalidName(string? name)
+        private void PrintErrorMessage(string phrase)
         {
-            return string.IsNullOrWhiteSpace(name) || name.Any(char.IsDigit) || name.Any(char.IsSymbol);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Error: " + phrase);
+            Console.ResetColor();
         }
+        public string? GetName()
+        {
+            return name;
+        }
+ 
     }
 }

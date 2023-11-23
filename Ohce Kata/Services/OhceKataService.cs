@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Ohce_Kata.Services.Helpers;
+using Ohce_Kata.Services.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,43 +10,29 @@ namespace Ohce_Kata.Services
 {
     public class OhceKataService : Interfaces.IOhceKataService
     {
-        public OhceKataService() { }
+        public OhceKataService() { _dateTimeService = new DateService(); }
+        public OhceKataService(IDateService dateService) { _dateTimeService = dateService; }
+        private readonly IDateService _dateTimeService;
 
-        public void GetGreets(string name)
+        public string GetGreets(string name)
         {
-            var hour = DateTime.Now.Hour;
+            var hour = _dateTimeService.GetHour();
 
-            var greetsPhrase = hour switch
+            return hour switch
             {
-                > 6 and < 12 => $"¡Buenos dias {name}!",
-                > 12 and < 20 => $"!Buenas tardes {name}!",
-                _ => $"!Buenas noches {name}!"
+                >= 6 and < 12 => $"¡Buenos dias {name}!",
+                >= 12 and < 20 => $"¡Buenas tardes {name}!",
+                _ => $"¡Buenas noches {name}!"
 
             };
-            Console.WriteLine(greetsPhrase);
+            
         }
 
-        public void Palindrome(string text)
-        {
-            if (isPalindrome(text))
-            {
-                Console.WriteLine(text);
-                Console.WriteLine("!Bonita Palabra¡");
-            }
-            else
-            {
-                Console.WriteLine(ReverseWord(text));
-            }
-        }
         public bool isPalindrome(string word)
         {
-            return word.Equals(ReverseWord(word));
+            return word.Equals(StringHelper.ReverseWord(word),StringComparison.OrdinalIgnoreCase);
         }
 
-        public string ReverseWord(string word)
-        {
-            var reverseWord = word.Reverse().ToArray();
-            return new string(reverseWord);
-        }
+
     }
 }

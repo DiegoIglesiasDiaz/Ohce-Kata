@@ -8,10 +8,8 @@ namespace Ohce_Kata.Services.Interfaces
 {
     public interface IOhceKataService
     {
-        void GetGreets(string name);
-        void Palindrome(string text);
+        string GetGreets(string name);
         bool isPalindrome(string word);
-        string ReverseWord(string word);
 
     }
 }

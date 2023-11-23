@@ -2,7 +2,7 @@ using Ohce_Kata.Services;
 
 namespace OhceKataTest
 {
-    public class Tests
+    public class DateServiceTests
     {
         [SetUp]
         public void Setup()

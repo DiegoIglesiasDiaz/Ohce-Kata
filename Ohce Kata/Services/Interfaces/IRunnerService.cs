@@ -9,9 +9,8 @@ namespace Ohce_Kata.Services.Interfaces
     public interface IRunnerService
     {
         void Run();
-        void SetupName();
         string GetNameFromConsole();
-        bool isInvalidName(string? name);
+        public string? GetName();
 
     }
 }
