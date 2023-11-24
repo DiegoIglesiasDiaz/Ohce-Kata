@@ -5,9 +5,7 @@ VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ohce Kata", "Ohce Kata\Ohce Kata.csproj", "{24A26121-6DDB-46AF-AF83-61405C480F59}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OhceKataTestsKK", "OhceKataTests\OhceKataTestsKK.csproj", "{F7869EF0-306A-4381-93E3-244C185F95AC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OhceKataTest", "OhceKataTest\OhceKataTest.csproj", "{3A5B5F8A-808A-4846-8B47-0CDB6F2D6213}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OhceKataTest", "OhceKataTest\OhceKataTest.csproj", "{3A5B5F8A-808A-4846-8B47-0CDB6F2D6213}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +17,6 @@ Global
 		{24A26121-6DDB-46AF-AF83-61405C480F59}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24A26121-6DDB-46AF-AF83-61405C480F59}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{24A26121-6DDB-46AF-AF83-61405C480F59}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F7869EF0-306A-4381-93E3-244C185F95AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F7869EF0-306A-4381-93E3-244C185F95AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F7869EF0-306A-4381-93E3-244C185F95AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F7869EF0-306A-4381-93E3-244C185F95AC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3A5B5F8A-808A-4846-8B47-0CDB6F2D6213}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3A5B5F8A-808A-4846-8B47-0CDB6F2D6213}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A5B5F8A-808A-4846-8B47-0CDB6F2D6213}.Release|Any CPU.ActiveCfg = Release|Any CPU

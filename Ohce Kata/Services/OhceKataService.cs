@@ -14,6 +14,8 @@ namespace Ohce_Kata.Services
         public OhceKataService(IDateService dateService) { _dateTimeService = dateService; }
         private readonly IDateService _dateTimeService;
 
+
+
         public string GetGreets(string name)
         {
             var hour = _dateTimeService.GetHour();
@@ -25,14 +27,15 @@ namespace Ohce_Kata.Services
                 _ => $"¡Buenas noches {name}!"
 
             };
-            
+
         }
 
         public bool isPalindrome(string word)
         {
-            return word.Equals(StringHelper.ReverseWord(word),StringComparison.OrdinalIgnoreCase);
+            return word.Equals(StringHelper.ReverseWord(word), StringComparison.OrdinalIgnoreCase);
         }
 
 
     }
+
 }

@@ -13,9 +13,13 @@ namespace OhceKataTest
 {
     public class RunnerServiceTest
     {
+        private RunnerService _runnerService;
+        private Mock<IOhceKataService> _mockOhceKata;
         [SetUp]
         public void Setup()
         {
+            _mockOhceKata = new Mock<IOhceKataService>();
+            _runnerService = new RunnerService(_mockOhceKata.Object);
         }
 
         [Test]
@@ -23,7 +27,7 @@ namespace OhceKataTest
         [TestCase("Vlad")]
         public void GetNameFromConsoleTest(string name)
         {
-            var _runnerService = new RunnerService();
+            
             Console.SetIn(new StringReader(name));
 
             var result = _runnerService.GetNameFromConsole();
@@ -35,38 +39,39 @@ namespace OhceKataTest
         [TestCase("Fabio$")]
         public void GetNameFromConsoleTest_ArgumentException(string name)
         {
-            var _runnerService = new RunnerService();
             Console.SetIn(new StringReader(name));
-            Assert.Catch<ArgumentException>(() =>_runnerService.GetNameFromConsole());
+            Assert.Catch<ArgumentException>(() => _runnerService.GetNameFromConsole());
         }
 
 
         [Test]
         [TestCase("Noon")]
         [TestCase("oso")]
-        public void AnalyzeWordPalindrome(string word)
+        public void When_word_is_palindrom_Then_returns_true(string word)
         {
-            var _runnerService = new RunnerService();
             var stringWriter = new StringWriter();
             Console.SetOut(stringWriter);
+          
+            _mockOhceKata.Setup(x=>x.isPalindrome(word)).Returns(true);
             _runnerService.AnalyzeWord(word);
-
             Assert.True(stringWriter.ToString().Contains(StringHelper.ReverseWord(word)));
-            Assert.True(stringWriter.ToString().Contains("!Bonita Palabra¡"));
+            Assert.True(stringWriter.ToString().Contains("¡Bonita Palabra!"));
         }
 
         [Test]
         [TestCase("stop")]
         [TestCase("Mouse")]
-        public void AnalyzeWordNotPalindrome(string word)
+        public void When_word_is_not_a_palindrom_Then_returns_false(string word)
         {
-            var _runnerService = new RunnerService();
+          
             var stringWriter = new StringWriter();
             Console.SetOut(stringWriter);
+            _mockOhceKata.Setup(x => x.isPalindrome(word)).Returns(false);
             _runnerService.AnalyzeWord(word);
+           
 
             Assert.True(stringWriter.ToString().Contains(StringHelper.ReverseWord(word)));
-            Assert.False(stringWriter.ToString().Contains("!Bonita Palabra¡"));
+            Assert.False(stringWriter.ToString().Contains("¡Bonita Palabra!"));
         }
 
 
@@ -75,7 +80,7 @@ namespace OhceKataTest
         {
 
             var _runnerService = new Mock<IRunnerService>();
-         
+
         }
     }
 }

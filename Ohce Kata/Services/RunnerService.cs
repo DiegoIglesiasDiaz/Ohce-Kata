@@ -4,18 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Ohce_Kata.Services.Helpers;
+using Ohce_Kata.Services.Interfaces;
+
 namespace Ohce_Kata.Services
 {
     public class RunnerService : Interfaces.IRunnerService
     {
-        public RunnerService()
+        public RunnerService(IOhceKataService _OhceKataService)
         {
-            ohceKataService = new OhceKataService();
+            ohceKataService = _OhceKataService;
         }
 
         private string? name { get; set; }
         const string STOP_WORD = "Stop!";
-        private readonly OhceKataService ohceKataService;
+        private readonly IOhceKataService ohceKataService;
         public void Run()
         {
             bool isValidName = false;
@@ -38,7 +40,10 @@ namespace Ohce_Kata.Services
             {
                 var inputText = Console.ReadLine();
                 if (inputText == STOP_WORD)
-                    break;
+                {
+                    Console.WriteLine($"Adios {name}");
+                }
+                   
                 if (string.IsNullOrWhiteSpace(inputText))
                     PrintErrorMessage("You must type a word");
                 else
@@ -56,7 +61,7 @@ namespace Ohce_Kata.Services
             Console.WriteLine(StringHelper.ReverseWord(text));
 
             if (ohceKataService.isPalindrome(text))
-                Console.WriteLine("!Bonita Palabra¡");
+                Console.WriteLine("¡Bonita Palabra!");
 
         }
         public string GetNameFromConsole()
